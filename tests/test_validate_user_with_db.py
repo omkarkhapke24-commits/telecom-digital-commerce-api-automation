@@ -1,3 +1,5 @@
+from database.db_client import DatabaseClient
+
 def test_validate_user_with_database(authenticated_api_client):
     api_response = authenticated_api_client.get("/users/2")
     api_data = api_response.json()["data"]
@@ -5,7 +7,8 @@ def test_validate_user_with_database(authenticated_api_client):
     db = DatabaseClient()
 
     db_data = db.execute_query(
-        "SELECT * FROM users where id = 2")
+        "SELECT * FROM users WHERE id = 2"
+    )
 
     assert api_data["id"]==db_data["id"]
     assert api_data["email"]==db_data["email"]
