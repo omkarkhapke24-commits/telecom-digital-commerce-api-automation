@@ -1,0 +1,1 @@
+"File uploads were intentionally omitted because the chosen API did not expose a multipart/form-data endpoint. The framework can be extended to support them if required."

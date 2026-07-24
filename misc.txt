@@ -1,0 +1,36 @@
+ #old get and post method code before refactoring api_client.py for removing code duplication. 
+ 
+ def get(self, endpoint):
+       try:
+        
+            url = f"{self.base_url}{endpoint}"
+
+            headers = {
+                **COMMON_HEADERS,
+                **AUTH_HEADERS
+            }
+            logger.info(f"Sending GET request to {url}")
+            start_time = time.time()
+            response = requests.get(url, headers=headers)
+            end_time = time.time()
+            execution_time = end_time - start_time
+            logger.info(f"Response Status Code: {response.status_code}")
+            logger.info(f"Execution Time: {execution_time:.2f} seconds")
+            return response
+            
+            
+        except Exception as error:
+           logger.error(f"GET request failed: {error}")
+           raise
+           
+
+#code to build post method now
+    def post(self,endpoint, body):   
+        url = f"{self.base_url}{endpoint}" 
+        headers = {
+            **COMMON_HEADERS,
+            **AUTH_HEADERS
+        }
+        response = requests.post(url, headers = headers, json = body)
+        return response
+        
